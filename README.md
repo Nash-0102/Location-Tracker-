@@ -185,14 +185,3 @@ Feel free to use, modify, or extend it.
 Real-time tracking system using Node.js + Socket.IO
 
 ---
-
-If you want, I can also add:
-
-✔ Project logo
-✔ Screenshots section
-✔ Installation GIF
-✔ Badges (stars, forks, license, version)
-✔ Deploy instructions (Render, Vercel, Railway)
-
-Just say **“Add more details”** or **“Make it more professional.”**
-
