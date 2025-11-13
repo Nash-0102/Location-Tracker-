@@ -52,3 +52,29 @@ socket.on("user-disconnected" , (id)=>{
         delete markers[id];
     }
 })
+
+//search box 
+
+L.Control.geocoder().addTo(map);
+
+document.getElementById("btn").addEventListener("click", () => {
+    const place = document.getElementById("search").value;
+
+    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${place}`)
+        .then(res => res.json())
+        .then(data => {
+            if (data.length > 0) {
+                const lat = data[0].lat;
+                const lon = data[0].lon;
+
+                map.setView([lat, lon], 16);
+
+                L.marker([lat, lon]).addTo(map)
+                    .bindPopup(place)
+                    .openPopup();
+            } else {
+                alert("Place not found");
+            }
+        });
+});
+
