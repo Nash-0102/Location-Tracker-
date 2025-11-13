@@ -78,3 +78,35 @@ document.getElementById("btn").addEventListener("click", () => {
         });
 });
 
+
+
+document.getElementById("locateMe").addEventListener("click", () => {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            (pos) => {
+                const lat = pos.coords.latitude;
+                const lon = pos.coords.longitude;
+
+                map.setView([lat, lon], 16);
+
+                const selfId = socket.id;
+
+                if (!markers[selfId]) {
+                    markers[selfId] = L.marker([lat, lon]).addTo(map)
+                        .bindPopup("You are here").openPopup();
+                } else {
+                    markers[selfId].setLatLng([lat, lon]);
+                }
+            },
+            (err) => {
+                console.error(err);
+                alert("Unable to fetch your location!");
+            },
+            { enableHighAccuracy: true }
+        );
+    } else {
+        alert("Your browser does not support GPS!");
+    }
+});
+
+
